@@ -1,0 +1,17 @@
+.login{
+	padding:15px;
+	border-left: 10px solid blue;
+    background-color: #d3fffc;
+}
+
+button{
+	cursor: pointer;
+}
+
+button:hover{
+	background-color: #FFFFFF;
+}
+
+a{
+	cursor:pointer;
+}
