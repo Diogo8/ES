@@ -5,7 +5,7 @@ before_install:
 dist: trusty
 language: ruby
 rvm:
-  - 2.4.1
+  - 2.5.1
 script:
   - bundle exec rails db:migrate RAILS_ENV=test
   - bundle exec rspec
