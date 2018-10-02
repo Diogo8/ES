@@ -11,7 +11,7 @@ export default class Navbar extends Component {
 
   logout = () => {
     localStorage.removeItem("access_token");
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   handleInputChange = ev => {

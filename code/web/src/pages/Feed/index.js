@@ -48,10 +48,10 @@ export default class Feed extends React.Component {
         <Navbar history={this.props.history} search={this.handleSearch} />
         <CreatePost post={this.handleNewPost}/>
         <div id="SearchResults">
-          <NewsFeed _news={SearchResults} nome="Search Results" />
+          <NewsFeed _news={SearchResults} name="Search Results" />
         </div>
         <div id="NewsFeed">
-          <NewsFeed _news={NewsResults} nome="News Feed" />
+          <NewsFeed _news={NewsResults} name="News Feed" />
         </div>
       </div>
     );

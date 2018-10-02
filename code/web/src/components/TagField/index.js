@@ -17,8 +17,8 @@ class TagField extends Component {
       state: { currentInput },
     } = this;
     return (
-      <div>
-        <h2>{label}</h2>
+      <div class="row">
+        <h3>{label}</h3>
         <input
           value={currentInput}
           onChange={ev => {

@@ -26,7 +26,7 @@ const handleRegister = (values, history) => {
   signUp(values)
     .then(response => {
       if (response.status === 201) {
-        history.push("/login");
+        history.push("/");
       }
     })
     .catch(response => {
@@ -57,6 +57,7 @@ class SignUp extends Component {
     for (var i = 0; i < values.interests.length; i++) {
       bodyFormData.append("interests[]", values.interests[i]);
     }
+
     handleRegister(bodyFormData, history);
   }
 
@@ -64,108 +65,127 @@ class SignUp extends Component {
     const {
       props: { history }
     } = this;
-    console.log(this.props);
     return (
-      <Formik
-        onSubmit={values => this.valuesToFormData(values, history)}
-        validationSchema={validationSchema}
-        initialValues={{
-          username: "",
-          email: "",
-          interests: "",
-          orcid: "",
-          name: "",
-          research_area: "",
-          institution: "",
-          description: "",
-          avatar: ""
-        }}
-        render={({ setFieldValue }) => (
-          <div>
-            <Form>
-              <h1>Register</h1>
-              <Field
-                name="username"
-                type="text"
-                component={InputField}
-                label="Username"
-              />
-              <Field
-                name="email"
-                type="text"
-                component={InputField}
-                label="Email"
-              />
-              <Field
-                name="orcid"
-                type="text"
-                component={InputField}
-                label="ORCID Number"
-              />
-              <Field
-                name="password"
-                type="password"
-                component={InputField}
-                label="Password"
-              />
-
-              <h3>Avatar</h3>
-
-              <Dropzone
-                onDrop={ev => this.onDrop(setFieldValue, ev)}
-                multiple={false}
-              >
-                <div>
-                  {this.state.imageFiles.length > 0 && (
+      <div>
+        <body className="wrapper">
+          <div className="container">
+            <div className="row">
+              <img href="" />
+              <h1>Create Your Account</h1>
+              <h5>All fields with a * must be filled out</h5>
+            </div>
+            <div className="row">
+              <div className="register">
+                <Formik
+                  onSubmit={values => this.valuesToFormData(values, history)}
+                  validationSchema={validationSchema}
+                  initialValues={{
+                    username: "",
+                    email: "",
+                    interests: "",
+                    orcid: "",
+                    name: "",
+                    research_area: "",
+                    institution: "",
+                    description: "",
+                    avatar: ""
+                  }}
+                  render={({ setFieldValue }) => (
                     <div>
-                      <div>
-                        {this.state.imageFiles.map(file => (
-                          <img id="avatar" src={file.preview} />
-                        ))}
-                      </div>
+                      <Form>
+                        <div className="row">
+                          <div className="six columns">
+                            <h1>Register</h1>
+                            <Field
+                              name="username"
+                              type="text"
+                              component={InputField}
+                              label="Username *"
+                            />
+                            <Field
+                              name="email"
+                              type="text"
+                              component={InputField}
+                              label="Email *"
+                            />
+                            <Field
+                              name="orcid"
+                              type="text"
+                              component={InputField}
+                              label="ORCID Number *"
+                            />
+                            <Field
+                              name="password"
+                              type="password"
+                              component={InputField}
+                              label="Password *"
+                            />
+
+                            <label>Avatar</label>
+
+                            <Dropzone
+                              onDrop={ev => this.onDrop(setFieldValue, ev)}
+                              multiple={false}
+                            >
+                              <div>
+                                {this.state.imageFiles.length > 0 && (
+                                  <div>
+                                    <div>
+                                      {this.state.imageFiles.map(file => (
+                                        <img id="avatar" src={file.preview} />
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </Dropzone>
+
+                            <h3>Detailed Info</h3>
+                            <Field
+                              name="name"
+                              type="text"
+                              component={InputField}
+                              label="Name *"
+                            />
+
+                            <Field
+                              name="research_area"
+                              type="text"
+                              component={InputField}
+                              label="Research Area *"
+                            />
+
+                            <Field
+                              name="institution"
+                              type="text"
+                              component={InputField}
+                              label="Institution *"
+                            />
+                            <Field
+                              name="description"
+                              type="text"
+                              component={InputField}
+                              label="Description"
+                            />
+
+                            <FieldArray
+                              name="interests"
+                              component={props => (
+                                <TagField {...props} label="Interests" />
+                              )}
+                            />
+                            <button type="submit">Confirm</button>
+                          </div>
+                        </div>
+                      </Form>
                     </div>
                   )}
-                </div>
-              </Dropzone>
-
-              <h1>Detailed Info</h1>
-              <Field
-                name="name"
-                type="text"
-                component={InputField}
-                label="Name"
-              />
-
-              <Field
-                name="research_area"
-                type="text"
-                component={InputField}
-                label="Research Area"
-              />
-
-              <Field
-                name="institution"
-                type="text"
-                component={InputField}
-                label="Institution"
-              />
-
-              <Field
-                name="description"
-                type="text"
-                component={InputField}
-                label="Description"
-              />
-
-              <FieldArray
-                name="interests"
-                component={props => <TagField {...props} label="Interests" />}
-              />
-              <button type="submit">Confirm</button>
-            </Form>
+                />
+              </div>
+            </div>
           </div>
-        )}
-      />
+        </body>
+      </div>
     );
   }
 }
