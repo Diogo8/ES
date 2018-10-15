@@ -8,31 +8,27 @@ class UsersController < ApplicationController
     @user = User.new(params.except(:interests))
 
     if @user.save
-      @user.create_interests(params)
-      render json: @user.info, status: 201
+      Interest.associate(@user, params[:interests])
+      render :create, status: :created
     else
-      render json: @user.errors, status: 400
+      render json: @user.errors, status: :bad_request
     end
   end
 
   def update
     params = user_params
-    user = current_resource_owner
-    if user.update_attributes(params.except(:interests))
-      user.create_interests(params)
-      render json: user.info
+    @user = current_resource_owner
+    if @user.update_attributes(params.except(:interests))
+      Interest.associate(@user, params[:interests])
+      render :create
     else
-      render json: user.errors
+      render json: @user.errors
     end
   end
 
   def show
-    render json: current_resource_owner.info
-  end
-
-  def index
-    @users = User.all
-    render json: @users.attributes.map { |u| u.info }
+    @user = User.find(user_params["id"])
+    render :create
   end
 
 private

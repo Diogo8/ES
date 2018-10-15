@@ -14,6 +14,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "rack-cors", require: "rack/cors"
 gem "carrierwave", "~> 1.0"
 gem "mini_magick"
+gem "jbuilder", "~> 2.7.0"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
